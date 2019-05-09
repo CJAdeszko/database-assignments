@@ -1,0 +1,77 @@
+1. Document any assumptions you make about what data should be stored, what data types should be used, etc.,
+and include them in a text file.
+
+  I believe that for a proper student record keeping database, we would need multiple tables. A student table containing
+  an integer ID, first_name, and last_name. A student_records table containing student ID, class code (ex: PSY 101), professor_name
+  and the letter grade. A possible creation of these tables:
+
+  CREATE TABLE students (
+	id int,
+  	first_name VARCHAR(20),
+  	last_name VARCHAR(20)
+    );
+
+  CREATE TABLE student_records (
+    id int,
+  	student_id int,
+    class_code VARCHAR(7)
+    professor_name VARCHAR(20),
+    grade VARCHAR(1)
+  );
+
+
+2. Build a database for the students/classes data model. Create a SQL file that creates the tables and inserts
+sample data (the questions below will help you create the data). Submit queries for the following data and include
+the results:
+
+    All students who have taken a particular class.
+
+      SELECT s.first_name, s.last_name, student_records.class_code FROM students AS s
+      JOIN student_records ON s.id = student_records.student_id WHERE student_records.class_code = 'CS 101';
+
+      OUTPUT:
+
+      first_name	last_name	 class_code
+      John	      Smith	     CS 101
+      Jane	      Doe	       CS 101
+      Joe	        Schmoe	   CS 101
+      Tonya	      Tester	   CS 101
+      Daniel	    Database	 CS 101
+
+
+    The number of each grade (using letter grades A-F) earned in a particular class.
+
+      SELECT student_records.class_code, student_records.grade, COUNT (student_records.grade) from student_records
+      GROUP BY student_records.grade, student_records.class_code HAVING student_records.class_code = 'CS 101';
+
+      OUTPUT:
+
+      class_code	grade	count
+      CS 101	    A	     2
+      CS 101	    B	     1
+      CS 101	    C	     1
+      CS 101	    F	     1
+
+
+    Class names and the total number of students who have taken each class in the list.
+
+      SELECT student_records.class_code, COUNT (student_records.class_code) AS student_registration
+      FROM student_records GROUP BY student_records.class_code;
+
+      OUTPUT:
+
+      class_code	student_registration
+      EE 301	     2
+      PSY 101	     2
+      CS 101	     5
+      PHY 201	     3
+
+    The class taken by the largest number of students.
+
+      SELECT student_records.class_code, COUNT (student_records.class_code) AS student_registration
+      FROM student_records GROUP BY student_records.class_code ORDER BY student_registration DESC LIMIT 1;
+
+      OUTPUT:
+
+      class_code	student_registration
+      CS 101	     5

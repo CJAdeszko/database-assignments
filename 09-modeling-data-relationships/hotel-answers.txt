@@ -1,0 +1,26 @@
+A guest who exists in the database and has not booked a room.
+
+SELECT g.first_name, g.last_name FROM guests AS g LEFT OUTER JOIN bookings AS b ON
+g.first_name = b.guest_first AND g.last_name = b.guest_last WHERE b IS NULL;
+
+OUTPUT:
+
+first_name	 last_name
+Joe	          Schmoe
+
+Bookings for a guest who has booked two rooms for the same dates.
+
+SELECT DISTINCT ON (b.check_in_date, b.check_out_date) COUNT(room_num) AS room_count, b.check_in_date, b.check_out_date,
+g.first_name, g.last_name FROM guests AS g RIGHT OUTER JOIN bookings AS b ON g.first_name = b.guest_first AND
+g.last_name = b.guest_last GROUP BY g.first_name, g.last_name, b.check_in_date, b.check_out_date HAVING COUNT(room_num) >= 2;
+
+OUTPUT:
+
+room_count	   check_in_date	              check_out_date	           first_name	   last_name
+2	             2019-05-01T00:00:00.000Z	    2019-05-04T00:00:00.000Z	 John	         Smith
+
+
+Bookings for a guest who has booked one room several times on different dates.
+
+
+OUTPUT:
