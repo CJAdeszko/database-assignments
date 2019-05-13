@@ -2,22 +2,23 @@ CREATE TABLE guests (
 	first_name VARCHAR(20),
 	last_name VARCHAR(20),
 	phone_number VARCHAR(12),
-  	email VARCHAR(30),
-  	address text
+  email VARCHAR(30),
+  address text
 );
 
 CREATE TABLE rooms (
 	room_num int,
-  	floor_num int,
-  	price numeric(6)
+  floor_num int,
+  price numeric(6)
 );
 
 CREATE TABLE bookings (
+  guest_id int,
 	guest_first VARCHAR(20),
-  	guest_last VARCHAR(20),
+  guest_last VARCHAR(20),
 	room_num int,
-  	check_in_date DATE,
-  	check_out_date DATE
+  check_in_date DATE,
+  check_out_date DATE
 );
 
 
@@ -34,9 +35,9 @@ INSERT INTO rooms (room_num, floor_num, price) VALUES
 (5, 5, 500.00),
 (6, 6, 600.00);
 
-INSERT INTO bookings (guest_first, guest_last, room_num, check_in_date, check_out_date) VALUES
-('John', 'Smith', 1, '2019-05-01', '2019-05-04'),
-('John', 'Smith', 3, '2019-05-01', '2019-05-04'),
-('Jane', 'Doe', 2, '2019-05-01', '2019-05-04'),
-('Jane', 'Doe', 2, '2019-06-01', '2019-06-04'),
-('Jane', 'Doe', 2, '2019-07-01', '2019-07-04');
+INSERT INTO bookings (guest_id, guest_first, guest_last, room_num, check_in_date, check_out_date) VALUES
+(1, 'John', 'Smith', 1, '2019-05-01', '2019-05-04'),
+(1, 'John', 'Smith', 3, '2019-05-01', '2019-05-04'),
+(2, 'Jane', 'Doe', 2, '2019-05-01', '2019-05-04'),
+(2, 'Jane', 'Doe', 3, '2019-06-01', '2019-06-04'),
+(2, 'Jane', 'Doe', 2, '2019-07-01', '2019-07-04');

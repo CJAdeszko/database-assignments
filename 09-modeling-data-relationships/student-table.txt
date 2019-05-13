@@ -24,7 +24,7 @@ and include them in a text file.
 sample data (the questions below will help you create the data). Submit queries for the following data and include
 the results:
 
-    All students who have taken a particular class.
+    --All students who have taken a particular class.
 
       SELECT s.first_name, s.last_name, student_records.class_code FROM students AS s
       JOIN student_records ON s.id = student_records.student_id WHERE student_records.class_code = 'CS 101';
@@ -39,7 +39,7 @@ the results:
       Daniel	    Database	 CS 101
 
 
-    The number of each grade (using letter grades A-F) earned in a particular class.
+    --The number of each grade (using letter grades A-F) earned in a particular class.
 
       SELECT student_records.class_code, student_records.grade, COUNT (student_records.grade) from student_records
       GROUP BY student_records.grade, student_records.class_code HAVING student_records.class_code = 'CS 101';
@@ -53,7 +53,7 @@ the results:
       CS 101	    F	     1
 
 
-    Class names and the total number of students who have taken each class in the list.
+    --Class names and the total number of students who have taken each class in the list.
 
       SELECT student_records.class_code, COUNT (student_records.class_code) AS student_registration
       FROM student_records GROUP BY student_records.class_code;
@@ -66,7 +66,7 @@ the results:
       CS 101	     5
       PHY 201	     3
 
-    The class taken by the largest number of students.
+    --The class taken by the largest number of students.
 
       SELECT student_records.class_code, COUNT (student_records.class_code) AS student_registration
       FROM student_records GROUP BY student_records.class_code ORDER BY student_registration DESC LIMIT 1;
